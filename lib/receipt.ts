@@ -1,0 +1,2 @@
+export function executionSuccess(tx:any){if((tx.statusName||tx.status)!=='FINALIZED')return false;if(tx.txExecutionResultName)return tx.txExecutionResultName==='FINISHED_WITH_RETURN';const leaders=tx.consensus_data?.leader_receipt?.filter((x:any)=>x.mode==='leader')||[];return ['SUCCESS','FINISHED_WITH_RETURN'].includes(leaders.at(-1)?.execution_result)}
+export function receiptState(tx:any){const status=String(tx.statusName||tx.status||'PENDING');if(status==='FINALIZED')return executionSuccess(tx)?'FINALIZED':'EXECUTION_FAILED';return status}

@@ -1,0 +1,15 @@
+import test from'node:test';import assert from'node:assert/strict';import{executionSuccess,receiptState}from'../lib/receipt.ts';import{available}from'../lib/actions.ts';
+const tx=(status,result)=>({status,consensus_data:{leader_receipt:[{mode:'leader',execution_result:result}]}});
+test('accepted is never finalized success',()=>assert.equal(executionSuccess(tx('ACCEPTED','SUCCESS')),false));
+test('finalized revert is failure',()=>assert.equal(receiptState(tx('FINALIZED','ERROR')),'EXECUTION_FAILED'));
+test('success requires leader execution',()=>assert.equal(executionSuccess({status:'FINALIZED',consensus_data:{leader_receipt:[{mode:'validator',execution_result:'SUCCESS'}]}}),false));
+test('latest leader failure overrides older success',()=>assert.equal(executionSuccess({status:'FINALIZED',consensus_data:{leader_receipt:[{mode:'leader',execution_result:'SUCCESS'},{mode:'leader',execution_result:'ERROR'}]}}),false));
+test('finalized return succeeds',()=>assert.equal(executionSuccess(tx('FINALIZED','SUCCESS')),true));
+const c={status:'EVIDENCE_OPEN',owner:'owner',requester:'requester',evidence_deadline:100,expires_at:1000,challenge_deadline:200,challenged:false,response:''};
+test('outsider cannot submit evidence',()=>assert.equal(available('submit_evidence',c,'outsider',50).enabled,false));
+test('owner evidence blocked at deadline',()=>assert.equal(available('submit_evidence',c,'owner',100).enabled,false));
+test('review enabled after evidence deadline',()=>assert.equal(available('validator_review',c,'outsider',100).enabled,true));
+test('finalize blocked until challenge deadline',()=>assert.equal(available('finalize',{...c,status:'REVIEWED'},'outsider',199).enabled,false));
+test('challenged record cannot finalize',()=>assert.equal(available('finalize',{...c,status:'CHALLENGED'},'owner',201).enabled,false));
+test('expired record enables timeout',()=>assert.equal(available('resolve_timeout',c,'outsider',1000).enabled,true));
+test('second challenge forbidden',()=>assert.equal(available('challenge',{...c,status:'REVIEWED',challenged:true},'owner',150).enabled,false));
