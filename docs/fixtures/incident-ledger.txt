@@ -1,0 +1,6 @@
+POLICYPROOF SYNTHETIC DISPUTE FIXTURE. Fictional organization and incident PP-REVIEW-001.
+Authoritative incident timing ledger, revision 1.
+Detection: 2026-10-01T00:00:00Z.
+Public disclosure: 2026-10-03T00:00:00Z.
+Elapsed time from detection to disclosure: 48 hours.
+This ledger records disclosure timing only. It makes no assertion about publication of remediation reports.

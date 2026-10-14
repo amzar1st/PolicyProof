@@ -1,5 +1,6 @@
 """Behavioral harness, not a GenVM, storage, or network-consensus emulator."""
 import types
+import json
 bigint=int
 class TreeMap(dict):pass
 class UserError(Exception):pass
@@ -17,7 +18,11 @@ class Runtime:
   self.fetches.append(url);v=self.pages[url]
   if isinstance(v,Exception):raise v
   return v
- def prompt(self,prompt):return self.answers.pop(0)
+ def prompt(self,prompt,**kwargs):
+  if prompt.startswith('Verify proposed'):
+   data=json.loads(prompt.split('DATA: ',1)[1])
+   return json.dumps([{'id':r['id'],'supported':getattr(self,'candidate_supported',True)} for r in data['proposed']])
+  return self.answers.pop(0)
 runtime=Runtime()
 def nondet(leader,validator):
  answer=leader()

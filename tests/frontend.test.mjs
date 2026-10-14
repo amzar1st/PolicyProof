@@ -13,3 +13,22 @@ test('finalize blocked until challenge deadline',()=>assert.equal(available('fin
 test('challenged record cannot finalize',()=>assert.equal(available('finalize',{...c,status:'CHALLENGED'},'owner',201).enabled,false));
 test('expired record enables timeout',()=>assert.equal(available('resolve_timeout',c,'outsider',1000).enabled,true));
 test('second challenge forbidden',()=>assert.equal(available('challenge',{...c,status:'REVIEWED',challenged:true},'owner',150).enabled,false));
+test('late challenge blocks review through response deadline',()=>assert.equal(available('validator_review',{...c,status:'CHALLENGED',challenged:true,response_deadline:260},'owner',201).enabled,false));
+test('opponent can respond after filing closes',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'owner',201).enabled,true));
+test('challenger cannot add late counter-evidence',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'requester',201).enabled,false));
+test('response deadline is exclusive',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'owner',260).enabled,false));
+
+const {generateDemoAccount,signingAccount}=await import('../lib/accounts.ts');
+const {validateSignedWrite}=await import('../lib/rpc-policy.ts');
+const {privateKeyToAccount,generatePrivateKey}=await import('viem/accounts');
+const {encodeFunctionData}=await import('viem');
+const {studionet}=await import('genlayer-js/chains');
+test('typing an existing address does not provide a signer',()=>assert.throws(()=>signingAccount('0x1111111111111111111111111111111111111111'),/read-only/));
+test('demo accounts possess a local signing key',()=>{const a=generateDemoAccount();assert.equal(signingAccount(a).address.toLowerCase(),a);assert.equal(typeof signingAccount(a).signTransaction,'function')});
+const target='0x2222222222222222222222222222222222222222';
+async function signed({impersonate=false,chain=61999,value=0n,recipient=target}={}){const a=privateKeyToAccount(generatePrivateKey());const data=encodeFunctionData({abi:studionet.consensusMainContract.abi,functionName:'addTransaction',args:[impersonate?'0x1111111111111111111111111111111111111111':a.address,recipient,5n,3n,'0x00']});const raw=await a.signTransaction({chainId:chain,to:studionet.consensusMainContract.address,data,value,gas:1000000n,gasPrice:0n,nonce:0});return{raw,address:a.address}}
+test('proxy accepts recovered matching signer',async()=>{const x=await signed();assert.equal(await validateSignedWrite(x.raw,target,61999),x.address)});
+test('attacker signature cannot impersonate existing sender',async()=>{const x=await signed({impersonate:true});await assert.rejects(validateSignedWrite(x.raw,target,61999),/sender/)});
+test('cross-chain replay is rejected',async()=>{const x=await signed({chain:1});await assert.rejects(validateSignedWrite(x.raw,target,61999),/chain/)});
+test('nonzero payment is rejected',async()=>{const x=await signed({value:1n});await assert.rejects(validateSignedWrite(x.raw,target,61999),/zero-value/)});
+test('signed write cannot target another contract',async()=>{const x=await signed({recipient:'0x3333333333333333333333333333333333333333'});await assert.rejects(validateSignedWrite(x.raw,target,61999),/target/)});

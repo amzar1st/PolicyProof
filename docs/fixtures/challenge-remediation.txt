@@ -1,0 +1,5 @@
+POLICYPROOF SYNTHETIC DISPUTE FIXTURE. Fictional organization and incident PP-REVIEW-001.
+Public remediation report. Published: 2026-10-04T12:00:00Z.
+Concrete fixes: rotated affected API keys, revoked exposed credentials, and enabled audit logging.
+We challenge the original verdict because this report satisfies the remediation requirement before 2026-10-05T00:00:00Z.
+We also assert that the incident was actually detected on 2026-10-02T12:00:00Z. This timing assertion is informal and is not an authoritative ledger correction.

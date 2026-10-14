@@ -1,47 +1,42 @@
 # PolicyProof
 
-GenLayer DApp for checking whether an organization complied with an immutable, owner-published natural-language policy. Validators independently retrieve public evidence, interpret the policy, and reach consensus before a scoped attestation or violation record is finalized.
+PolicyProof uses GenLayer Intelligent Contracts to assess public evidence against immutable organization-published policies. Each mandatory requirement receives its own outcome, source fingerprints, exact quotations, and support audit. Final records preserve the complete evidence-to-verdict relationship.
 
-## Deployment
+Public app: https://policyproof-reviewed.tinymule33.chatgpt.site
 
-- Public app: [PolicyProof](https://policyproof.amzar1st96.chatgpt.site).
+## Development deployment
 
-- Network: **Studionet (61999)**, development environment; state can reset.
-- Contract: [`0xFe06c46228B2a35Af131BB175FB1F043473f4D10`](https://explorer-studio.genlayer.com/address/0xFe06c46228B2a35Af131BB175FB1F043473f4D10).
-- RPC: `https://studio.genlayer.com/api`.
-- Source: [`contracts/policyproof.py`](contracts/policyproof.py).
-- Deployment via GenLayer Studio's built-in account, Normal (Full Consensus); no external wallet connection.
-- Evidence window: 300 seconds; challenge window: 120 seconds; resolution deadline: 86,400 seconds.
-- Synthetic demonstration: `org-1`, `policy-1`, `check-1`. The fictional incident and organization are explicitly labeled; no real entity is being certified.
+This is a resettable StudioNet demonstration (chain 61999), with fictional organizations and incidents. Registrations are **SELF_DECLARED**. A signed account proves account control, not legal identity, professional accreditation, or domain ownership. There are no payments, escrows, or legal certifications.
 
-## Workflow
+The current contract and network configuration are in [`lib/deployment.json`](lib/deployment.json). The replacement public app URL and verified dispute receipts are documented in [`docs/steward-response.md`](docs/steward-response.md) and [`docs/live-dispute.json`](docs/live-dispute.json).
 
-`create_organization → publish_policy → open_compliance_check → submit_evidence / submit_response → validator_review → challenge / submit_counter_evidence → validator_review → finalize`
+## Evidence integrity
 
-Unfinished checks have a deadline-gated `resolve_timeout` exit. All public writes are exposed in the frontend, including challenge, counter-evidence, retry review, finalization, and timeout.
+- Each attachment records the leader’s retrieval result as `VALID`, `EMPTY`, `UNAVAILABLE`, `HASH_MISMATCH`, or `TOO_LARGE`, its party, expected commitment and retrieved content SHA-256 when available. Rejected attachments cannot veto reliable opposing evidence.
+- Full documents up to 64,000 characters are passed to both the requirement evaluation and a separate semantic support audit. Larger documents are excluded completely, never silently truncated. Necessary missing facts yield `UNKNOWN`; affirmative independently supported violations can still be recorded.
+- Optional hashes commit to exact UTF-8 rendered text, not raw HTML or screenshot bytes.
+- Policies contain 1–24 immutable requirements separated by newlines or semicolons. Compound clauses remain part of the same requirement and must all be satisfied. Review cannot omit or duplicate a requirement ID.
+- `SATISFIED` and `VIOLATED` need exact source quotations, checked as contiguous substrings of successfully retrieved full documents. A separate semantic audit checks whether those quotations entail the particular requirement outcome in context, including later qualifications and contradictory facts. Unsupported relations become `UNKNOWN`.
+- Validators independently fetch sources and run the requirement evaluation and support audit. Invalid-source failure details are recorded individually and cannot veto otherwise sufficient reliable evidence. Consensus compares each attachment’s validity, reliable content fingerprints, and requirement outcomes; rejected-source diagnostics are retained for audit without requiring their irrelevant failure details to match. Each validator also verifies the leader’s quoted spans against its own complete retrievals and independently checks that they substantiate materially equivalent decision-critical facts. Different reliable page versions or conflicting factual observations cannot silently agree merely because their verdict labels match.
+- Aggregate verdicts are derived deterministically: all satisfied = `COMPLIANT`; both satisfied and violated = `PARTIALLY_COMPLIANT`; any violation with no satisfied requirement = `NON_COMPLIANT`; otherwise ambiguity or missing facts remain unresolved. Missing evidence alone cannot prove a violation.
 
-Verdicts: `COMPLIANT`, `PARTIALLY_COMPLIANT`, `NON_COMPLIANT`, `POLICY_AMBIGUOUS`, `INSUFFICIENT_EVIDENCE`.
+Equivalent valid quotations can differ in wording or span when independent semantic verification confirms the same decisive facts. Transient failures of necessary sources, conflicting facts, or changed reliable source bytes can prevent consensus. Participants can retry an unaccepted transaction; they cannot overwrite a recorded review or reset its filing deadline. Immutable, hash-committed sources are preferable. LLM entailment remains a semantic judgment, not a mathematical proof.
 
-Only finalized `COMPLIANT` creates an attestation. Partial and non-compliance record violations. Ambiguous, insufficient, and expired checks remain unresolved without an attestation. There are no escrow balances, payment flows, or bonds.
+## Disputes
 
-## Safeguards
+`create_organization → publish_policy → open_compliance_check → submit_evidence / submit_response → validator_review → challenge → submit_counter_evidence → validator_review → finalize`
 
-- Only the organization owner publishes policies. Versions are immutable and checks pin a policy ID and SHA256.
-- Registrations are **SELF_DECLARED**, not domain ownership or legal identity verification.
-- Only the requester and organization owner submit evidence. Each side has four initial slots and two reserved challenge slots; one side cannot consume the other's capacity.
-- Review cannot precede the submission deadline. Challenges preserve their original deadline. One challenge round per check prevents indefinite extension; finalization waits for the post-review challenge period.
-- Each validator independently fetches evidence and runs the AI interpretation; the verdict, fetched URLs, failed URLs, and citations must agree.
-- Every substantive verdict needs exact citations among successfully fetched URLs. Unavailable, empty, or optional hash-mismatched submitted evidence blocks a positive attestation.
-- Optional hashes commit to **exact UTF-8 rendered text**, not HTML, screenshots, or raw document bytes. Snapshot hashes record the leader's fetched text; they are audit references, not proof that all validators saw identical page bytes.
-- Policy text, claims, responses, and page content are delimited as untrusted data in the AI prompt. This reduces, but cannot eliminate, prompt injection and model interpretation risk.
-- All frontend reads explicitly use `LATEST_FINAL`. Pending and Accepted transactions are not shown as completed writes. A finalized receipt must also contain a successful leader execution; receipts can be rechecked without resubmission.
-- The app's fixed upstream RPC proxy allows zero-value writes only to PolicyProof through the Studionet consensus contract. No private keys or wallet extension connection are used.
+Each side has four initial evidence slots and two reserved dispute slots. The original challenge **filing deadline** stays fixed. A challenge opens one full, separate, bounded response period from its filing time, even if filed just before the filing deadline. Only the opposing party can append counter-evidence during this period; replies cannot extend it. The second review waits for the response deadline. One challenge round is allowed, and the second review can be finalized immediately. A hard expiry permits `resolve_timeout` without attestation.
 
-## Studio account model
+Only finalized `COMPLIANT` issues a scoped attestation. Partial/non-compliance produces a violation record. Ambiguity, insufficient evidence, and expired checks remain unresolved. Invalid unrelated attachments do not automatically prevent an otherwise supported attestation.
 
-The app supports the same address-based development sender model as the Studio simulator. Select an address from Studio or generate a new development sender. These addresses **do not provide production wallet authentication**. This deployment is suitable for development demonstrations; use a persistent testnet with signed wallet transactions and authenticated organization identity for production use. Attestations cover a particular policy version and check scope, not general legal or regulatory compliance.
+## Signed accounts
 
-## Verify
+The app supports a connected wallet on StudioNet or a freshly generated local demo signer. Demo private keys stay in browser memory, never server logs or persistent browser storage, and disappear on refresh. Use a wallet for durable ownership. Entering another address is read-only and cannot provide its signing key.
+
+The proxy accepts only signed, zero-value transactions for the configured PolicyProof contract, recovers the signer, requires it to match the consensus transaction sender, and checks the chain ID. The contract enforces organization-owner and party restrictions using the transaction sender. Tests include forged sender substitution, wrong-chain signatures, foreign contract targets, and another participant attempting owner-only publication.
+
+## Verification
 
 ```bash
 python -m unittest discover -s tests -v
@@ -52,22 +47,8 @@ pnpm build
 node scripts/verify-live.mjs
 ```
 
-The behavioral suite has 37 tests with a lightweight GenLayer harness; it verifies contract rules, not actual GenVM storage or network consensus. The 12 frontend tests cover account/deadline gating and finalized receipt failure handling. `verify-live.mjs` independently checks deployed source equality, finalized reads, and public transaction receipts. See [`docs/live-verification.json`](docs/live-verification.json) for the latest network evidence.
+The Python suite is a behavioral harness, not GenVM or network consensus. Node tests cover receipts, deadline/account gating and cryptographic sender checks. Live evidence is recorded separately and is complete only when receipts and execution are successful, the final state is confirmed with `LATEST_FINAL`, and deployed source equality is checked. Pending, accepted, reverted, or historical results are never represented as a completed new demonstration.
 
-## Reviewer walkthrough
+[`scripts/live-dispute.mjs`](scripts/live-dispute.mjs) deploys the current source with 120-second evidence and 180-second challenge/response windows, generates two distinct ephemeral signing accounts, attempts unauthorized publication, and runs the fictional contested workflow. It uses accepted state only for orchestration, then independently waits for all transaction finalizations and reads final state. Generated keys never enter the proof file. Running it deploys a new contract and updates `lib/deployment.json`; do not run it against a production account.
 
-1. Open the app and inspect `check-1` in the Checks tab.
-2. Read the immutable policy, synthetic evidence, validator reasoning, fetched citations, and final attestation.
-3. Open the contract explorer and match the address to `lib/deployment.json`.
-4. Select a fresh Studio development account; register your own organization and publish a policy.
-5. Open a check, add public evidence, and optionally respond as the organization owner.
-6. Wait five minutes; request validator review. Wait two minutes, then finalize, or challenge within the window with a new evidence URL.
-7. Inspect the Transactions tab and wait for finalized successful execution; use Recheck receipt if needed.
-
-The live example proves only the fictional fixture's workflow. It is not an independent audit of a real organization's conduct.
-
-## Verified live demo
-
-Studionet full consensus finalized `check-1` with `COMPLIANT`, issuing `attestation-check-1` after the challenge window. This attestation covers fictional incident PP-DEMO-001 only. The deployed source matches `contracts/policyproof.py` byte for byte. Deployment, organization, policy, check, response, review, and finalization transactions all finalized successfully. See [sanitized live verification](docs/live-verification.json).
-
-Validation: 37 contract behavior tests, 12 frontend action/receipt tests, TypeScript checking, and a successful production build. The Python harness simulates the runtime; the live consensus demonstration is verified separately.
+The original demonstration remains in `docs/live-verification.json` as historical evidence and does not prove the upgraded contract's behavior.

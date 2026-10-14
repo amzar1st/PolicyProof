@@ -1,0 +1,916 @@
+{
+  "network": "Studionet",
+  "chainId": 61999,
+  "address": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+  "startedAt": "2026-10-14T07:52:05.390Z",
+  "participants": {
+    "organization": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+    "requester": "0x99D3845f10F319F88771eeEF1491655E49E547eA"
+  },
+  "transactions": [
+    {
+      "method": "create_organization",
+      "args": [
+        "PolicyProof fictional disputed organization",
+        "https://example.org"
+      ],
+      "hash": "0x468344dc8f0c51bbbac374cbbb7afb709850806cf590ae86c66d22b8564766e6",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x14402D49f317CE1a2F35BAE01b1804A2A9703dCb": "agree",
+          "0x36728d2a123aB444E603EE5b2ad17d18Bb193557": "agree",
+          "0x5310dcF075E0BD47d29B8ec6581F736C767f54D2": "idle",
+          "0x9ea87b28DcA2F79fe108CF06a4c13B4c876AC23d": "agree",
+          "0xcE1d6bBB36B744536153966B4DD42276f5ADd0F8": "idle"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "ACxvcmctMQ==",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  44,
+                  111,
+                  114,
+                  103,
+                  45,
+                  49
+                ],
+                "readable": "\"org-1\""
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "publish_policy",
+      "args": [
+        "org-1",
+        "Fictional disclosure and remediation policy",
+        "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements.\nFor fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z.",
+        "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+      ],
+      "hash": "0xad19264b4b3c330f55c3d9942e011ed7471fedf8324236b396380ff2facadc34",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x4EDbE1FC9EAeC7b0EBA849b0C76AE73Eb0ad5C47": "agree",
+          "0x5310dcF075E0BD47d29B8ec6581F736C767f54D2": "idle",
+          "0xDB1c35c1f05d885999b8f13e5735307BcC16Be88": "agree",
+          "0xE6BD8050758CB15fC88387223E31Ae2708B119dC": "agree",
+          "0xacc2459F341D7a887bcA8FAA62F1EC9378d4Bc67": "idle"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AERwb2xpY3ktMQ==",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  68,
+                  112,
+                  111,
+                  108,
+                  105,
+                  99,
+                  121,
+                  45,
+                  49
+                ],
+                "readable": "\"policy-1\""
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "publish_policy",
+      "args": [
+        "org-1",
+        "Impersonation attempt",
+        "Unauthorized policy",
+        "https://example.org/forged"
+      ],
+      "hash": "0x04a2baad3a4f3d8cbee926a5bbb1809986c6bd591d96c71e8c399c1a838759a6",
+      "stage": "submitted",
+      "expectedFailure": true,
+      "status": "ACCEPTED",
+      "from": "0x99D3845f10F319F88771eeEF1491655E49E547eA",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x03D58A4DeF6fDFc032A56374785a5F571D07Bc11": "agree",
+          "0x4EDbE1FC9EAeC7b0EBA849b0C76AE73Eb0ad5C47": "agree",
+          "0x76c25AFC12c75485703cCFfd0083AA6201455B25": "agree",
+          "0x9ea87b28DcA2F79fe108CF06a4c13B4c876AC23d": "agree",
+          "0xacc2459F341D7a887bcA8FAA62F1EC9378d4Bc67": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "ERROR",
+            "result": {
+              "raw": "AU9ubHkgb3JnYW5pemF0aW9uIG93bmVyIG1heSBwdWJsaXNo",
+              "status": "rollback",
+              "payload": "Only organization owner may publish"
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "ERROR"
+          }
+        ]
+      }
+    },
+    {
+      "method": "open_compliance_check",
+      "args": [
+        "policy-1",
+        "Review fictional incident PP-REVIEW-001 only, including disclosure timing and remediation through 2026-10-05."
+      ],
+      "hash": "0xef8a04cc2609b999c3e1e6a2c802a511181d4ebc1045c3bb5da6af1daf684afc",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x99D3845f10F319F88771eeEF1491655E49E547eA",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x3E5ee2507cc167C9925Bf10c67D7986581112024": "agree",
+          "0x5310dcF075E0BD47d29B8ec6581F736C767f54D2": "idle",
+          "0x6737ca1d6BDF8b7C4f19143E2D55581Ca64eb7C3": "agree",
+          "0x90402341F0B0e97b23023c0a87de957FB7148E0F": "agree",
+          "0xDB1c35c1f05d885999b8f13e5735307BcC16Be88": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "ADxjaGVjay0x",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  60,
+                  99,
+                  104,
+                  101,
+                  99,
+                  107,
+                  45,
+                  49
+                ],
+                "readable": "\"check-1\""
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "submit_evidence",
+      "args": [
+        "check-1",
+        "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt",
+        "Authoritative ledger records disclosure 48 hours after detection.",
+        ""
+      ],
+      "hash": "0xeb9c5c756e6b8a5cac2065bca07af90e9073aa6aabecc0f4426f2f01b019464a",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x99D3845f10F319F88771eeEF1491655E49E547eA",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x14402D49f317CE1a2F35BAE01b1804A2A9703dCb": "idle",
+          "0x4404Fb70d490c935758146f42A73DC850FF95C71": "idle",
+          "0x6737ca1d6BDF8b7C4f19143E2D55581Ca64eb7C3": "agree",
+          "0xBBb165E4c9d73a1493D363280f7067Cd07891dBE": "agree",
+          "0xec2Fb79cd12255Eb34886CEd7332f27B98DEe658": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AAA=",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  0
+                ],
+                "readable": "null"
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "submit_response",
+      "args": [
+        "check-1",
+        "The organization disputes violation; deliberately invalid hash tests absence of a party veto.",
+        "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "hash": "0x652e447af02366cdcbaa2e45312f7bc47eb0536a30eedfbff657ac193a06c348",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x4EDbE1FC9EAeC7b0EBA849b0C76AE73Eb0ad5C47": "agree",
+          "0x772ffCd1dF6Cc566eC4b8d3f4F4f8eBbb6B36C84": "agree",
+          "0x90402341F0B0e97b23023c0a87de957FB7148E0F": "agree",
+          "0xE6BD8050758CB15fC88387223E31Ae2708B119dC": "agree",
+          "0xec2Fb79cd12255Eb34886CEd7332f27B98DEe658": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AAA=",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  0
+                ],
+                "readable": "null"
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "validator_review",
+      "args": [
+        "check-1"
+      ],
+      "hash": "0x0cb3e6a5e6827ea441f1f60970deba3a460206fe1783f7687b4179564a7d6059",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x99D3845f10F319F88771eeEF1491655E49E547eA",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x03D58A4DeF6fDFc032A56374785a5F571D07Bc11": "disagree",
+          "0x3D83ab507785b95ca5C208bEc80CCe3D5ca98100": "agree",
+          "0x4EDbE1FC9EAeC7b0EBA849b0C76AE73Eb0ad5C47": "agree",
+          "0x76c25AFC12c75485703cCFfd0083AA6201455B25": "disagree",
+          "0xDB1c35c1f05d885999b8f13e5735307BcC16Be88": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AAA=",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  0
+                ],
+                "readable": "null"
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "disagree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "disagree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "challenge",
+      "args": [
+        "check-1",
+        "The public remediation report proves the second requirement was satisfied, and the organization disputes the timing.",
+        "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/challenge-remediation.txt",
+        ""
+      ],
+      "hash": "0x7e11900c71996af7e1d7d0535e6e8433a6ced8eb07383af41f8fb663264b9c34",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x14402D49f317CE1a2F35BAE01b1804A2A9703dCb": "agree",
+          "0x3E5ee2507cc167C9925Bf10c67D7986581112024": "idle",
+          "0x4404Fb70d490c935758146f42A73DC850FF95C71": "agree",
+          "0x4aba638Cf0Cf5249437AaD968fC69dde46ae6BAC": "agree",
+          "0xcE1d6bBB36B744536153966B4DD42276f5ADd0F8": "idle"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AAA=",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  0
+                ],
+                "readable": "null"
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "idle",
+            "execution_result": "ERROR"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "submit_counter_evidence",
+      "args": [
+        "check-1",
+        "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/requester-counter-ledger.txt",
+        "Final authoritative ledger rejects the informal timing correction while acknowledging remediation.",
+        ""
+      ],
+      "hash": "0x6a7c0cfb2425937de5e9ccd1d29983fdb3aef051d90fc1be55b86c9c89b5a559",
+      "stage": "submitted",
+      "expectedFailure": false,
+      "status": "ACCEPTED",
+      "from": "0x99D3845f10F319F88771eeEF1491655E49E547eA",
+      "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+      "consensus": {
+        "votes": {
+          "0x3E5ee2507cc167C9925Bf10c67D7986581112024": "agree",
+          "0x90402341F0B0e97b23023c0a87de957FB7148E0F": "agree",
+          "0x9ea87b28DcA2F79fe108CF06a4c13B4c876AC23d": "agree",
+          "0xBBb165E4c9d73a1493D363280f7067Cd07891dBE": "agree",
+          "0xec2Fb79cd12255Eb34886CEd7332f27B98DEe658": "agree"
+        },
+        "leaders": [
+          {
+            "execution_result": "SUCCESS",
+            "result": {
+              "raw": "AAA=",
+              "status": "return",
+              "payload": {
+                "raw": [
+                  0
+                ],
+                "readable": "null"
+              }
+            }
+          }
+        ],
+        "validators": [
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          },
+          {
+            "vote": "agree",
+            "execution_result": "SUCCESS"
+          }
+        ]
+      }
+    },
+    {
+      "method": "validator_review",
+      "args": [
+        "check-1"
+      ],
+      "hash": "0xc3b63d9f40d576af33f171cdb5219f291f00edb6cde7e25a6e9a8cad2b9cfbee",
+      "stage": "submitted",
+      "expectedFailure": false
+    }
+  ],
+  "registry": {
+    "checks": [
+      {
+        "attestation": null,
+        "challenge_deadline": 1791964966,
+        "challenge_reason": "The public remediation report proves the second requirement was satisfied, and the organization disputes the timing.",
+        "challenged": true,
+        "challenger": "organization",
+        "evidence": {
+          "organization": [
+            {
+              "challenge": false,
+              "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "statement": "The organization disputes violation; deliberately invalid hash tests absence of a party veto.",
+              "submitted_at": 1791964371,
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+            },
+            {
+              "challenge": true,
+              "expected_hash": "",
+              "statement": "The public remediation report proves the second requirement was satisfied, and the organization disputes the timing.",
+              "submitted_at": 1791964722,
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/challenge-remediation.txt"
+            }
+          ],
+          "requester": [
+            {
+              "challenge": false,
+              "expected_hash": "",
+              "statement": "Authoritative ledger records disclosure 48 hours after detection.",
+              "submitted_at": 1791964365,
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+            },
+            {
+              "challenge": true,
+              "expected_hash": "",
+              "statement": "Final authoritative ledger rejects the informal timing correction while acknowledging remediation.",
+              "submitted_at": 1791964728,
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/requester-counter-ledger.txt"
+            }
+          ]
+        },
+        "evidence_deadline": 1791964658,
+        "expires_at": 1792050758,
+        "history": [
+          {
+            "citations": [
+              "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+            ],
+            "failed_urls": [
+              "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+            ],
+            "fetched_urls": [
+              "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+            ],
+            "reasoning": "Scope is limited to fictional incident PP-REVIEW-001. I used the authoritative incident timing ledger for timing, per policy. The valid ledger states detection at 2026-10-01T00:00:00Z and public disclosure at 2026-10-03T00:00:00Z, i.e. 48 hours later, which affirmatively violates the 24-hour disclosure requirement. The ledger also expressly says it makes no assertion about publication of remediation reports, and no other valid source provides evidence on that point. The organization response is hash-mismatched and cannot supply facts; missing evidence alone does not prove violation, so the remediation-report requirement is UNKNOWN.",
+            "requirements": [
+              {
+                "explanation": "The requirement has two relevant clauses: public disclosure for PP-REVIEW-001 and timing within 24 hours of detection, with the authoritative ledger controlling timing. The valid authoritative ledger records detection on 2026-10-01T00:00:00Z and public disclosure on 2026-10-03T00:00:00Z, explicitly stating the elapsed time was 48 hours. Because 48 hours exceeds 24 hours, there is affirmative proof of a material timing violation.",
+                "id": "R1",
+                "observations": [
+                  {
+                    "quote": "Authoritative incident timing ledger, revision 1.\nDetection: 2026-10-01T00:00:00Z.\nPublic disclosure: 2026-10-03T00:00:00Z.\nElapsed time from detection to disclosure: 48 hours.",
+                    "source_id": "requester-0",
+                    "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+                    "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+                  }
+                ],
+                "requirement": "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements.",
+                "status": "VIOLATED",
+                "support_verified": true
+              },
+              {
+                "explanation": "To satisfy or violate this requirement, the record would need evidence about whether a public remediation report describing concrete fixes was published before 2026-10-05T00:00:00Z. The only valid source expressly states it addresses disclosure timing only and makes no assertion about remediation reports. No valid evidence in scope resolves this requirement.",
+                "id": "R2",
+                "observations": [],
+                "requirement": "For fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z.",
+                "status": "UNKNOWN",
+                "support_verified": true
+              }
+            ],
+            "reviewed_at": 1791964666,
+            "snapshots": [
+              {
+                "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+                "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+              }
+            ],
+            "sources": [
+              {
+                "characters": 375,
+                "expected_hash": "",
+                "id": "requester-0",
+                "side": "requester",
+                "status": "VALID",
+                "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+                "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+              },
+              {
+                "characters": 223,
+                "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+                "id": "organization-0",
+                "side": "organization",
+                "status": "HASH_MISMATCH",
+                "text_sha256": "c9409734fe1413610e27a17609bbb351ecd91d2cca4f11c336cc586c143cc427",
+                "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+              }
+            ],
+            "verdict": "NON_COMPLIANT"
+          }
+        ],
+        "id": "check-1",
+        "opened_at": 1791964358,
+        "organization_id": "org-1",
+        "owner": "0x2bd6ff119c541c6f15b8b93dd446dfef585ec794",
+        "policy_id": "policy-1",
+        "requester": "0x99d3845f10f319f88771eeef1491655e49e547ea",
+        "response": "The organization disputes violation; deliberately invalid hash tests absence of a party veto.",
+        "response_deadline": 1791965022,
+        "response_window": 300,
+        "review": {
+          "citations": [
+            "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+          ],
+          "failed_urls": [
+            "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+          ],
+          "fetched_urls": [
+            "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+          ],
+          "reasoning": "Scope is limited to fictional incident PP-REVIEW-001. I used the authoritative incident timing ledger for timing, per policy. The valid ledger states detection at 2026-10-01T00:00:00Z and public disclosure at 2026-10-03T00:00:00Z, i.e. 48 hours later, which affirmatively violates the 24-hour disclosure requirement. The ledger also expressly says it makes no assertion about publication of remediation reports, and no other valid source provides evidence on that point. The organization response is hash-mismatched and cannot supply facts; missing evidence alone does not prove violation, so the remediation-report requirement is UNKNOWN.",
+          "requirements": [
+            {
+              "explanation": "The requirement has two relevant clauses: public disclosure for PP-REVIEW-001 and timing within 24 hours of detection, with the authoritative ledger controlling timing. The valid authoritative ledger records detection on 2026-10-01T00:00:00Z and public disclosure on 2026-10-03T00:00:00Z, explicitly stating the elapsed time was 48 hours. Because 48 hours exceeds 24 hours, there is affirmative proof of a material timing violation.",
+              "id": "R1",
+              "observations": [
+                {
+                  "quote": "Authoritative incident timing ledger, revision 1.\nDetection: 2026-10-01T00:00:00Z.\nPublic disclosure: 2026-10-03T00:00:00Z.\nElapsed time from detection to disclosure: 48 hours.",
+                  "source_id": "requester-0",
+                  "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+                  "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+                }
+              ],
+              "requirement": "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements.",
+              "status": "VIOLATED",
+              "support_verified": true
+            },
+            {
+              "explanation": "To satisfy or violate this requirement, the record would need evidence about whether a public remediation report describing concrete fixes was published before 2026-10-05T00:00:00Z. The only valid source expressly states it addresses disclosure timing only and makes no assertion about remediation reports. No valid evidence in scope resolves this requirement.",
+              "id": "R2",
+              "observations": [],
+              "requirement": "For fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z.",
+              "status": "UNKNOWN",
+              "support_verified": true
+            }
+          ],
+          "reviewed_at": 1791964666,
+          "snapshots": [
+            {
+              "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+            }
+          ],
+          "sources": [
+            {
+              "characters": 375,
+              "expected_hash": "",
+              "id": "requester-0",
+              "side": "requester",
+              "status": "VALID",
+              "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+            },
+            {
+              "characters": 223,
+              "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "id": "organization-0",
+              "side": "organization",
+              "status": "HASH_MISMATCH",
+              "text_sha256": "c9409734fe1413610e27a17609bbb351ecd91d2cca4f11c336cc586c143cc427",
+              "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+            }
+          ],
+          "verdict": "NON_COMPLIANT"
+        },
+        "scope": "Review fictional incident PP-REVIEW-001 only, including disclosure timing and remediation through 2026-10-05.",
+        "status": "CHALLENGED"
+      }
+    ],
+    "counts": {
+      "checks": 1,
+      "organizations": 3,
+      "policies": 1
+    },
+    "organizations": [
+      {
+        "created_at": 1791964338,
+        "id": "org-1",
+        "identity": "SELF_DECLARED",
+        "name": "PolicyProof fictional disputed organization",
+        "owner": "0x2bd6ff119c541c6f15b8b93dd446dfef585ec794",
+        "website": "https://example.org"
+      },
+      {
+        "created_at": 1791964800,
+        "id": "org-2",
+        "identity": "SELF_DECLARED",
+        "name": "PolicyProof public app signing smoke test (fictional)",
+        "owner": "0x767b83a286a9aa35c792f317b5cf49554dadb951",
+        "website": "https://example.org"
+      },
+      {
+        "created_at": 1791964874,
+        "id": "org-3",
+        "identity": "SELF_DECLARED",
+        "name": "PolicyProof public app signing smoke test (fictional)",
+        "owner": "0x3ddb938b206ac2e77289f9e3a96556f44775f7c2",
+        "website": "https://example.org"
+      }
+    ],
+    "policies": [
+      {
+        "id": "policy-1",
+        "organization_id": "org-1",
+        "published_at": 1791964345,
+        "publisher": "0x2bd6ff119c541c6f15b8b93dd446dfef585ec794",
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements."
+          },
+          {
+            "id": "R2",
+            "text": "For fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z."
+          }
+        ],
+        "source_url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt",
+        "text": "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements.\nFor fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z.",
+        "text_sha256": "3fcefbd7e16806f11f330c37dee452e016a102339361ac94c1fa4229957f8852",
+        "title": "Fictional disclosure and remediation policy"
+      }
+    ],
+    "windows": {
+      "challenge": 300,
+      "evidence": 300,
+      "resolution": 86400
+    }
+  },
+  "deploymentHash": "0xd58f64a47b39721ff273d48b6fdec3bbc669a71fdb802c06a741e27c01fbd693",
+  "deployment": {
+    "hash": "0xd58f64a47b39721ff273d48b6fdec3bbc669a71fdb802c06a741e27c01fbd693",
+    "status": "ACCEPTED",
+    "from": "0x2Bd6fF119c541C6F15B8B93dd446dfEF585ec794",
+    "to": "0xb6e89F3b0E44c1c42ee839d73e7b7E535EAD4c9b",
+    "consensus": {
+      "votes": {
+        "0x3E5ee2507cc167C9925Bf10c67D7986581112024": "agree",
+        "0x5310dcF075E0BD47d29B8ec6581F736C767f54D2": "agree",
+        "0x6737ca1d6BDF8b7C4f19143E2D55581Ca64eb7C3": "idle",
+        "0x772ffCd1dF6Cc566eC4b8d3f4F4f8eBbb6B36C84": "agree",
+        "0xacc2459F341D7a887bcA8FAA62F1EC9378d4Bc67": "idle"
+      },
+      "leaders": [
+        {
+          "execution_result": "SUCCESS",
+          "result": {
+            "raw": "AAA=",
+            "status": "return",
+            "payload": {
+              "raw": [
+                0
+              ],
+              "readable": "null"
+            }
+          }
+        }
+      ],
+      "validators": [
+        {
+          "vote": "idle",
+          "execution_result": "ERROR"
+        },
+        {
+          "vote": "idle",
+          "execution_result": "ERROR"
+        },
+        {
+          "vote": "agree",
+          "execution_result": "SUCCESS"
+        },
+        {
+          "vote": "agree",
+          "execution_result": "SUCCESS"
+        }
+      ]
+    }
+  },
+  "sourceSha256": "ebdde270269bf63e18642cf96c2c34d22c5d4febf85e860b1f54dd2fe552d06d",
+  "sourceMatches": true,
+  "checkId": "check-1",
+  "firstReview": {
+    "citations": [
+      "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+    ],
+    "failed_urls": [
+      "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+    ],
+    "fetched_urls": [
+      "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+    ],
+    "reasoning": "Scope is limited to fictional incident PP-REVIEW-001. I used the authoritative incident timing ledger for timing, per policy. The valid ledger states detection at 2026-10-01T00:00:00Z and public disclosure at 2026-10-03T00:00:00Z, i.e. 48 hours later, which affirmatively violates the 24-hour disclosure requirement. The ledger also expressly says it makes no assertion about publication of remediation reports, and no other valid source provides evidence on that point. The organization response is hash-mismatched and cannot supply facts; missing evidence alone does not prove violation, so the remediation-report requirement is UNKNOWN.",
+    "requirements": [
+      {
+        "explanation": "The requirement has two relevant clauses: public disclosure for PP-REVIEW-001 and timing within 24 hours of detection, with the authoritative ledger controlling timing. The valid authoritative ledger records detection on 2026-10-01T00:00:00Z and public disclosure on 2026-10-03T00:00:00Z, explicitly stating the elapsed time was 48 hours. Because 48 hours exceeds 24 hours, there is affirmative proof of a material timing violation.",
+        "id": "R1",
+        "observations": [
+          {
+            "quote": "Authoritative incident timing ledger, revision 1.\nDetection: 2026-10-01T00:00:00Z.\nPublic disclosure: 2026-10-03T00:00:00Z.\nElapsed time from detection to disclosure: 48 hours.",
+            "source_id": "requester-0",
+            "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+            "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+          }
+        ],
+        "requirement": "For fictional incident PP-REVIEW-001, disclose publicly within 24 hours of detection. The authoritative incident timing ledger and its correction entries control timing over informal statements.",
+        "status": "VIOLATED",
+        "support_verified": true
+      },
+      {
+        "explanation": "To satisfy or violate this requirement, the record would need evidence about whether a public remediation report describing concrete fixes was published before 2026-10-05T00:00:00Z. The only valid source expressly states it addresses disclosure timing only and makes no assertion about remediation reports. No valid evidence in scope resolves this requirement.",
+        "id": "R2",
+        "observations": [],
+        "requirement": "For fictional incident PP-REVIEW-001, publish a public remediation report describing concrete fixes before 2026-10-05T00:00:00Z.",
+        "status": "UNKNOWN",
+        "support_verified": true
+      }
+    ],
+    "reviewed_at": 1791964666,
+    "snapshots": [
+      {
+        "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+        "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+      }
+    ],
+    "sources": [
+      {
+        "characters": 375,
+        "expected_hash": "",
+        "id": "requester-0",
+        "side": "requester",
+        "status": "VALID",
+        "text_sha256": "10a185d76c98cbc0f6dab5cf9dc0e7c50e63ceee28a2f71c67cad5869b4c4979",
+        "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/incident-ledger.txt"
+      },
+      {
+        "characters": 223,
+        "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "id": "organization-0",
+        "side": "organization",
+        "status": "HASH_MISMATCH",
+        "text_sha256": "c9409734fe1413610e27a17609bbb351ecd91d2cca4f11c336cc586c143cc427",
+        "url": "https://raw.githubusercontent.com/amzar1st/PolicyProof/78c2c09fdbc2cfb36be20f431e9dff18ac01ce73/docs/fixtures/organization-response.txt"
+      }
+    ],
+    "verdict": "NON_COMPLIANT"
+  },
+  "error": "validator_review UNDETERMINED",
+  "failedAt": "2026-10-14T08:04:57.649Z",
+  "supersededReason": "The second review failed closed on non-JSON model output. No second review or final verdict was recorded. Structured JSON handling and independent comparison of equivalent quotations were added before the replacement run.",
+  "failedReviewReceipt": {
+    "hash": "0xc3b63d9f40d576af33f171cdb5219f291f00edb6cde7e25a6e9a8cad2b9cfbee",
+    "status": "FINALIZED",
+    "execution_result": "ERROR",
+    "error": "JSONDecodeError: Expecting value at initial JSON parse in evaluate(). No final second verdict was recorded."
+  }
+}

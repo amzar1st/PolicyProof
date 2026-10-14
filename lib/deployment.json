@@ -1,1 +1,12 @@
-{"address":"0xFe06c46228B2a35Af131BB175FB1F043473f4D10","chainId":61999,"rpc":"https://studio.genlayer.com/api","explorer":"https://explorer-studio.genlayer.com","studio":"https://studio.genlayer.com","evidenceWindow":300,"challengeWindow":120,"resolutionWindow":86400,"deployer":"0xaCbe1B6d951D6473d63e4286284e1b5d62a310FD"}
+{
+  "address": "0x6614698395eb72b90ed6602Aa8416b398B25140C",
+  "chainId": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "explorer": "https://explorer-studio.genlayer.com",
+  "studio": "https://studio.genlayer.com",
+  "evidenceWindow": 120,
+  "challengeWindow": 180,
+  "resolutionWindow": 86400,
+  "deployer": "0x81ce592F70Cd201a6519ccA0ede87EAfC3425210",
+  "responseWindow": 180
+}
