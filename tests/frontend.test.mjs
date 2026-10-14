@@ -13,3 +13,7 @@ test('finalize blocked until challenge deadline',()=>assert.equal(available('fin
 test('challenged record cannot finalize',()=>assert.equal(available('finalize',{...c,status:'CHALLENGED'},'owner',201).enabled,false));
 test('expired record enables timeout',()=>assert.equal(available('resolve_timeout',c,'outsider',1000).enabled,true));
 test('second challenge forbidden',()=>assert.equal(available('challenge',{...c,status:'REVIEWED',challenged:true},'owner',150).enabled,false));
+test('late challenge blocks review through response deadline',()=>assert.equal(available('validator_review',{...c,status:'CHALLENGED',challenged:true,response_deadline:260},'owner',201).enabled,false));
+test('opponent can respond after filing closes',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'owner',201).enabled,true));
+test('challenger cannot add late counter-evidence',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'requester',201).enabled,false));
+test('response deadline is exclusive',()=>assert.equal(available('submit_counter_evidence',{...c,status:'CHALLENGED',challenger:'requester',response_deadline:260},'owner',260).enabled,false));

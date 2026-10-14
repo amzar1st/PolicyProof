@@ -1,0 +1,5 @@
+POLICYPROOF SYNTHETIC DISPUTE FIXTURE. Fictional organization and incident PP-REVIEW-001.
+Authoritative incident timing ledger, revision 2 and final correction entry.
+Detection remains 2026-10-01T00:00:00Z. Public disclosure remains 2026-10-03T00:00:00Z, 48 hours later.
+The informal 2026-10-02 detection claim is incorrect and is not an authorized ledger correction.
+The public remediation report published on 2026-10-04T12:00:00Z is acknowledged. This does not change the missed disclosure deadline.
